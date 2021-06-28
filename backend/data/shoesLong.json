@@ -1,0 +1,24 @@
+[
+    {
+      "name": "Nike Off-White X Air Force 1 Low University Gold",
+      "description": "Yellow shoes with high sole",
+      "imageUrl": "https://www.cbimt.net/media/catalog/product/cache/890x/new0604/Off_White_x_Air_Force_1_Low_University_Gold_DD1876_700.jpg",
+      "category": "Shoes",
+      "size": "38",
+      "price": "30",
+      "featured": "false",
+      "sold": "false",
+      "createdByAdmin": "true"
+    },
+    {
+      "name": "Nike Off-White X Air Force 2 Low University Gold",
+      "description": "Yellow shoes with high sole",
+      "imageUrl": "https://www.cbimt.net/media/catalog/product/cache/890x/new0604/Off_White_x_Air_Force_1_Low_University_Gold_DD1876_700.jpg",
+      "category": "Shoes",
+      "size": "38",
+      "price": "30",
+      "featured": "false",
+      "sold": "false",
+      "createdByAdmin": "true"
+    }
+  ]
