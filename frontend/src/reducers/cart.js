@@ -48,7 +48,7 @@ export const cart = createSlice({
     telephone,
     accessToken
   ) => {
-    const SUBMIT_ORDER_URL = 'https://final-technigo-project.herokuapp.com/orders'
+    const SUBMIT_ORDER_URL = 'https://ulve17-final-app.herokuapp.com/orders'
     return (dispatch) => {
       fetch(SUBMIT_ORDER_URL, {
         method: 'POST',

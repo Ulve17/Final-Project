@@ -80,7 +80,7 @@ export const signup = (
     city,
     telephone
   ) => {
-    const SIGNUP_URL = 'https://herokuapp.com/users'
+    const SIGNUP_URL = 'https://ulve17-final-app.herokuapp.com/users'
     return (dispatch) => {
       fetch(SIGNUP_URL, {
         method: 'POST',
@@ -124,7 +124,7 @@ export const profile = (
     accessToken,
     userId
   ) => {
-    const PROFILE_URL = `https://herokuapp.com/users/${userId}`
+    const PROFILE_URL = `https://ulve17-final-app.herokuapp.com/users/${userId}`
     return (dispatch) => {
       fetch(PROFILE_URL, {
         method: 'GET',
@@ -160,7 +160,7 @@ export const edit = (
     city,
     telephone
   ) => {
-    const EDIT_URL = `https://herokuapp.com/users/${userId}`
+    const EDIT_URL = `https://ulve17-final-app.herokuapp.com/users/${userId}`
     return (dispatch) => {
       fetch(EDIT_URL, {
         method: 'PUT',
@@ -204,7 +204,7 @@ export const edit = (
     userId,
     sold
   ) => {
-    const SOLD_URL = `https://herokuapp.com/users/${userId}/products/${productId}`
+    const SOLD_URL = `https://ulve17-final-app.herokuapp.com/users/${userId}/products/${productId}`
     return (dispatch) => {
       fetch(SOLD_URL, {
         method: 'PUT',

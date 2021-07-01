@@ -9,7 +9,28 @@ import Shoes from './models/shoes'
 import User from './models/user'
 import Order from './models/order'
 import shoesData from './data/shoesLong.json'
+import cloudinaryFramework from 'cloudinary'
+import multer from 'multer'
+import cloudinaryStorage from 'multer-storage-cloudinary'
 
+const cloudinary = cloudinaryFramework.v2;
+dotenv.config()
+
+cloudinary.config({
+  cloud_name: 'dciqrlzem', // cloud name from cloudinary
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+})
+
+const storage = cloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: 'products',
+    allowedFormats: ['jpg', 'png', 'jpeg'],
+    transformation: [{ width: 900, height: 900, crop: 'limit' }],
+  },
+})
+const parser = multer({ storage })
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/finalAPI"
 mongoose.connect(mongoUrl, {
@@ -27,8 +48,10 @@ if (process.env.RESET_DB) {
     // Clears database
     await Product.deleteMany({ createdByAdmin: true })
 
-    // Saves all data fromshoesData and to the database
+    // Saves all data from productsData, shoesData and accessoriesData to the database
+    await productData.forEach(product => new Clothing(product).save())
     await shoesData.forEach(product => new Shoes(product).save())
+    await accessoriesData.forEach(product => new Accessory(product).save())
   }
   seedDatabase()
 }
@@ -128,7 +151,7 @@ app.get('/products', async (req, res) => {
 
 // Product upload
 app.post('/products', authenticateUser)
-app.post('/products', async (req, res) => {
+app.post('/products', parser.single('image'), async (req, res) => {
   const {
     name,
     description,
@@ -144,9 +167,11 @@ app.post('/products', async (req, res) => {
 
   let Schema
 
-  
-  if (category === 'Shoes') { Schema = Shoes }
- 
+  if (category === 'Accessories') { Schema = Accessory }
+  else if (category === 'Shoes') { Schema = Shoes }
+  else if (category === 'Jeans') { Schema = Jeans }
+  else { Schema = Clothing }
+
   try {
     const product = await new Schema({
       name,
