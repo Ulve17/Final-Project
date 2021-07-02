@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
-import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { ShowLoader } from '../components/ShowLoader'
 import { ui } from '../reducers/ui'
@@ -53,7 +52,6 @@ const EmptyState = styled.h2`
 
 export const ProductsGrid = () => {
     const dispatch = useDispatch()
-    //const history = useHistory()
     const isLoading = useSelector((store) => store.ui.isLoading)
     const [products, setProducts] = useState([])
     const [page, setPage] = useState(1)
