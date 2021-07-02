@@ -107,9 +107,7 @@ export const Header = () => {
                 <Link to="/products">
                     <ListItem>Products</ListItem>
                 </Link>
-                <Link to="/market">
-                    <ListItem>Market</ListItem>
-                </Link>
+
 
                 {!accessToken && (
                     <>

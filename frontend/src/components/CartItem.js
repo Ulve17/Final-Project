@@ -1,4 +1,4 @@
-import react from 'react'
+import React from 'react'
 import styled from 'styled-components/macro'
 import { useDispatch } from 'react-redux'
 import { cart } from '../reducers/cart'

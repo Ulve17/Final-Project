@@ -9,28 +9,7 @@ import Shoes from './models/shoes'
 import User from './models/user'
 import Order from './models/order'
 import shoesData from './data/shoesLong.json'
-import cloudinaryFramework from 'cloudinary'
-import multer from 'multer'
-import cloudinaryStorage from 'multer-storage-cloudinary'
 
-const cloudinary = cloudinaryFramework.v2;
-dotenv.config()
-
-cloudinary.config({
-  cloud_name: 'dciqrlzem', // cloud name from cloudinary
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-})
-
-const storage = cloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: 'products',
-    allowedFormats: ['jpg', 'png', 'jpeg'],
-    transformation: [{ width: 900, height: 900, crop: 'limit' }],
-  },
-})
-const parser = multer({ storage })
 
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/finalAPI"
 mongoose.connect(mongoUrl, {
@@ -45,13 +24,12 @@ if (process.env.RESET_DB) {
   console.log('Resetting database...')
 
   const seedDatabase = async () => {
+    
     // Clears database
     await Product.deleteMany({ createdByAdmin: true })
 
-    // Saves all data from productsData, shoesData and accessoriesData to the database
-    await productData.forEach(product => new Clothing(product).save())
+    // Saves all data from shoesData and to the database
     await shoesData.forEach(product => new Shoes(product).save())
-    await accessoriesData.forEach(product => new Accessory(product).save())
   }
   seedDatabase()
 }
@@ -99,6 +77,7 @@ app.get('/', (req, res) => {
 // All products
 app.get('/products', async (req, res) => {
   const { page, createdByAdmin, featured, sort } = req.query
+  
   // Pagination
   const pageNbr = +page || 1
   const perPage = 12
@@ -151,7 +130,7 @@ app.get('/products', async (req, res) => {
 
 // Product upload
 app.post('/products', authenticateUser)
-app.post('/products', parser.single('image'), async (req, res) => {
+app.post('/products', async (req, res) => {
   const {
     name,
     description,
@@ -167,11 +146,9 @@ app.post('/products', parser.single('image'), async (req, res) => {
 
   let Schema
 
-  if (category === 'Accessories') { Schema = Accessory }
-  else if (category === 'Shoes') { Schema = Shoes }
-  else if (category === 'Jeans') { Schema = Jeans }
-  else { Schema = Clothing }
-
+  
+  if (category === 'Shoes') { Schema = Shoes }
+ 
   try {
     const product = await new Schema({
       name,

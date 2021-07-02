@@ -8,7 +8,7 @@ const FooterWrapper = styled.footer`
     display: flex;
     flex-direction: column;
     padding: 20px;
-    background: #d3d3d3;
+    background: #fff;
     text-align: center;
     @media (min-width: 768px) {
     display: flex;
@@ -54,10 +54,10 @@ export const Footer = () => {
     <FooterWrapper>
         <FooterSection>
             <Link to="/about">
-            <FooterTitle>About us</FooterTitle>
+            <FooterTitle>About Me</FooterTitle>
             </Link>
             <FooterP>
-                This is a fictional webshop. The shop was created for the Technigo Bootcamp's final project.
+                This is a fictional webshop.
             </FooterP>
         </FooterSection>
 

@@ -6,7 +6,6 @@ import { ShowLoader } from '../components/ShowLoader'
 import { ui } from '../reducers/ui'
 import { ProductCard } from './ProductCard'
 import { Pagination } from './Pagination'
-import { Button } from '../lib/Button'
 import { Radio } from '../lib/Radio'
 
 const FeaturedContainer = styled.section`
@@ -38,8 +37,6 @@ const SortOptions = styled.div`
     max-width: 1300px;
     margin: auto;
     margin-bottom: 20px;
-    border-top: 1px solid #1a1a1a;
-    border-bottom: 1px solid #1a1a1a;
 `
 const EmptyWrapper = styled.div`
     display: grid;
@@ -62,42 +59,39 @@ export const ProductsGrid = () => {
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1)
     const [sort, setSort] = useState('newest')
-
+  
     useEffect(() => {
-        dispatch(ui.actions.setLoading(true))
-        fetch(
+      dispatch(ui.actions.setLoading(true))
+      fetch(
         `https://ulve17-final-app.herokuapp.com/products?page=${page}&sort=${sort}&featured=false&featured=true&createdByAdmin=true`
-        )
+      )
         .then((res) => res.json())
         .then((json) => {
-            dispatch(ui.actions.setLoading(false))
-            if (json.products) {
+          dispatch(ui.actions.setLoading(false))
+          if (json.products) {
             setProducts(json.products)
-            }
-            setPage(json.page)
-            setTotalPages(json.total_pages)
+          }
+          setPage(json.page)
+          setTotalPages(json.total_pages)
         })
     }, [page, sort, dispatch])
-
-    const toMarket = () => {
-        history.push('/market')
-    }
-
+  
     const previousPage = () => {
-        window.scrollTo({
+      window.scrollTo({
         top: 0,
         behavior: 'smooth',
-        })
-        setPage(page - 1)
+      })
+      setPage(page - 1)
     }
-
+  
     const nextPage = () => {
-        window.scrollTo({
+      window.scrollTo({
         top: 0,
         behavior: 'smooth',
-        })
-        setPage(page + 1)
+      })
+      setPage(page + 1)
     }
+  
 
     return (
         <FeaturedContainer>
@@ -153,15 +147,6 @@ export const ProductsGrid = () => {
                 <EmptyState>
                     We have no shoes for sale at the moment.
                 </EmptyState>
-                <EmptyState>
-                    Go to the market page to find some rare items
-                </EmptyState>
-                <Button
-                    onClick={toMarket}
-                    title="To market"
-                    background="#1a1a1a"
-                    color="#fff"
-                />
                 </EmptyWrapper>
             )}
             </>
