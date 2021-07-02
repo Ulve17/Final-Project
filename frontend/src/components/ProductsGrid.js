@@ -53,7 +53,7 @@ const EmptyState = styled.h2`
 
 export const ProductsGrid = () => {
     const dispatch = useDispatch()
-    const history = useHistory()
+    //const history = useHistory()
     const isLoading = useSelector((store) => store.ui.isLoading)
     const [products, setProducts] = useState([])
     const [page, setPage] = useState(1)

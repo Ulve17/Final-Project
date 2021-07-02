@@ -53,9 +53,6 @@ export const LandingPage = () => {
         history.push('/products')
     }
 
-    const toMarket = () => {
-        history.push('/market')
-    }
 
     return (
         <Container>
